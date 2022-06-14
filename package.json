@@ -1,0 +1,28 @@
+{
+  "name": "Snow Car",
+  "version": "1.0.0",
+  "description": "Decentraland project for gamejam",
+  "scripts": {
+    "start": "dcl start",
+    "build": "build-ecs",
+    "watch": "build-ecs --watch",
+    "ecs:install": "npm install --save-dev decentraland-ecs@latest",
+    "ecs:install-next": "npm install --save-dev decentraland-ecs@next",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
+  },
+  "devDependencies": {
+    "@dcl/eslint-config": "^1.0.1",
+    "decentraland-ecs": "latest"
+  },
+  "dependencies": {
+    "@dcl/ui-scene-utils": "^1.8.1",
+    "@dcl/ecs-scene-utils": "latest",
+    "@types/cannon": "^0.1.4",
+    "cannon": "github:schteppe/cannon.js"
+  },
+  "bundleDependencies": [
+    "@dcl/ui-scene-utils",
+    "@dcl/ecs-scene-utils"
+  ]
+}

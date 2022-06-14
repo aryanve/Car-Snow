@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outFile": "./bin/game.js",
+    "allowJs": true,
+    "paths": {
+      "@dcl/ui-scene-utils": [
+        "node_modules\\@dcl\\ui-scene-utils\\dist\\index.d.ts",
+        "../common_node_modules/node_modules/@dcl/ui-scene-utils/dist/index.d.ts"
+      ],
+      "@dcl/ecs-scene-utils": [
+        "node_modules/@dcl/ecs-scene-utils/dist/index.d.ts",
+        "node_modules\\@dcl\\ecs-scene-utils\\dist\\index.d.ts"
+      ]
+    },
+    "baseUrl": "."
+  },
+  "files": [
+    "node_modules/cannon/build/cannon.min.js"
+  ],
+  "include": [
+    "src/**/*.ts",
+  ],
+  "extends": "./node_modules/decentraland-ecs/types/tsconfig.json",
+  "compileOnSave": false
+}
