@@ -1,6 +1,6 @@
 ## Description
 
-Snow Car is a game made for decentraland game jam 2022.
+Car Snow is a game made for decentraland game jam 2022.
 
 ## Try it out
 
