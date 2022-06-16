@@ -1,4 +1,6 @@
 package-lock.json
-*.js
-node_modules
-bin/ 
+/node_modules
+npm-debug.log
+.DS_Store
+/*.env
+bin
