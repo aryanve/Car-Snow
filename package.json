@@ -1,5 +1,5 @@
 {
-  "name": "Car Snow",
+  "name": "Snow Car",
   "version": "1.0.0",
   "description": "Decentraland project for gamejam",
   "scripts": {
@@ -14,10 +14,11 @@
     "decentraland-ecs": "6.11.1"
   },
   "dependencies": {
-    "@dcl/ui-scene-utils": "^1.8.1",
     "@dcl/ecs-scene-utils": "latest",
+    "@dcl/ui-scene-utils": "^1.8.1",
     "@types/cannon": "^0.1.4",
-    "cannon": "github:schteppe/cannon.js"
+    "cannon": "github:schteppe/cannon.js",
+    "decentraland": "^3.10.4"
   },
   "bundleDependencies": [
     "@dcl/ui-scene-utils",
