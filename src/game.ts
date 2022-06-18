@@ -179,6 +179,7 @@ const input = Input.instance
 let isPointerPressed = false
 let isEKeyPressed = false
 let isFKeyPressed = false
+let isshiftPressed = false
 
 // Pointer
 input.subscribe("BUTTON_DOWN", ActionButton.POINTER, false, () => {
@@ -188,6 +189,13 @@ input.subscribe("BUTTON_UP", ActionButton.POINTER, false, () => {
   isPointerPressed = false
 })
 
+// shift 
+input.subscribe("BUTTON_DOWN", ActionButton.WALK, false, () => {
+  isshiftPressed = true
+})
+input.subscribe("BUTTON_UP", ActionButton.WALK, false, () => {
+  isshiftPressed = false
+})
 
 // E Key
 input.subscribe("BUTTON_DOWN", ActionButton.PRIMARY, false, () => {
@@ -208,7 +216,7 @@ input.subscribe("BUTTON_UP", ActionButton.SECONDARY, false, () => {
 class ButtonChecker {
   update(dt: number) {
     if (isPointerPressed) {
-       source.loop = true
+      source.loop = true
       source.playing = true
       // Accelerate
       if (forwardForce > -maxSpeed) forwardForce -= 300 * dt
@@ -221,7 +229,10 @@ class ButtonChecker {
         forwardForce = 0
       }
     }
-
+    if (isshiftPressed) {
+     // decelerate
+     forwardForce += 300 * dt
+   }
     if (isEKeyPressed && steerValue > -maxSteerValue) {
       steerValue -= 3 * dt
     }
@@ -241,9 +252,9 @@ engine.addSystem(new ButtonChecker())
 let prompt = new ui.OkPrompt(
   "Get in car",
   () => {new ui.OkPrompt(
-    "Use E F to turn left right",
+    "Use E=left,F=right, E+F=break",
     () => {new ui.OkPrompt(
-      "Use pointer to accelerate, E+F to break",
+      "Use pointer=accelerate,shift=back ",
       () => {},
       'Ok',
       true
@@ -254,3 +265,37 @@ let prompt = new ui.OkPrompt(
   'Ok',
   true
 )
+
+
+//--------------------------------------------------------- Invisible walls
+
+const wallShape = new CANNON.Box(new CANNON.Vec3(40, 50, 0.5))
+const wallNorth = new CANNON.Body({
+  mass: 0,
+  shape: wallShape,
+  position: new CANNON.Vec3(50, 49.5, 50),
+})
+world.addBody(wallNorth)
+
+const wallSouth = new CANNON.Body({
+  mass: 0,
+  shape: wallShape,
+  position: new CANNON.Vec3(50, 49.5, 0),
+})
+world.addBody(wallSouth)
+
+const wallEast = new CANNON.Body({
+  mass: 0,
+  shape: wallShape,
+  position: new CANNON.Vec3(50, 49.5, 50),
+})
+wallEast.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), -Math.PI / 2)
+world.addBody(wallEast)
+
+const wallWest = new CANNON.Body({
+  mass: 0,
+  shape: wallShape,
+  position: new CANNON.Vec3(0, 49.5, 50),
+})
+wallWest.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), -Math.PI / 2)
+world.addBody(wallWest)
